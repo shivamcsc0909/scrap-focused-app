@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>सही भाव (Sahi Bhaav) - B2B Scrap E-Commerce Marketplace</title>
+  <meta name="description" content="भारत का सबसे पारदर्शी B2B स्क्रैप ट्रेडिंग प्लेटफ़ॉर्म। कबाड़ का सही दाम, सीधा काम।">
+  <link rel="icon" type="image/png" href="./assets/branding/app_icon.png">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #10B981;
+      --primary-bg: #ECFDF5;
+      --bg: #F8FAFC;
+      --bg-alt: #F1F5F9;
+      --surface: #FFFFFF;
+      --surface-border: #E2E8F0;
+      --surface-border-strong: #CBD5E1;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-light: #64748B;
+      --accent: #D97706;
+      --accent-bg: #FEF3C7;
+      --blue: #0284C7;
+      --blue-bg: #E0F2FE;
+      --purple: #7C3AED;
+      --purple-bg: #F3E8FF;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      background-color: #E2E8F0;
+      color: var(--text);
+      line-height: 1.45;
+      overflow-x: hidden;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* App Shell Container - Centers like a Native Phone on Desktop, 100% on Mobile */
+    .app-shell {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 600px) {
+      .app-shell {
+        max-width: 100%;
+        box-shadow: none;
+      }
+    }
+
+    /* Screens Management */
+    .app-screen {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      width: 100%;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .app-screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Button Styles */
+    .btn-primary-main {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #FFFFFF;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+      width: 100%;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary-main:active {
+      opacity: 0.9;
+      transform: scale(0.99);
+    }
+    .btn-secondary-main {
+      background: #FFFFFF;
+      color: var(--text);
+      border: 1.5px solid var(--surface-border-strong);
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      text-decoration: none;
+    }
+
+    /* ========================================================
+       1. WELCOME SCREEN
+       ======================================================== */
+    .welcome-container {
+      padding: 32px 20px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--bg) 100%);
+    }
+    .welcome-brand-header {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .welcome-logo-img {
+      width: 84px;
+      height: 84px;
+      border-radius: 20px;
+      object-fit: contain;
+      box-shadow: 0 8px 24px rgba(5, 150, 105, 0.25);
+      margin-bottom: 12px;
+    }
+    .welcome-app-name {
+      font-size: 28px;
+      font-weight: 900;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+    .welcome-app-eng {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 2.5px;
+      margin-bottom: 8px;
+    }
+    .welcome-tagline-chip {
+      display: inline-block;
+      background: var(--primary-bg);
+      border: 1px solid #A7F3D0;
+      color: var(--primary-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .welcome-subtext {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      padding: 0 10px;
+    }
+
+    .welcome-features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .welcome-feat-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .feat-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .feat-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+    .feat-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ========================================================
+       2. LANGUAGE SELECT SCREEN
+       ======================================================== */
+    .lang-screen-container {
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+      background: #FFFFFF;
+    }
+    .lang-header {
+      text-align: center;
+      margin-top: 24px;
+    }
+    .lang-cards-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 36px 0;
+    }
+    .lang-card-item {
+      border: 2px solid var(--surface-border-strong);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      background: var(--bg);
+      transition: all 0.2s;
+    }
+    .lang-card-item.selected {
+      border-color: var(--primary);
+      background: var(--primary-bg);
+    }
+    .lang-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0F172A;
+    }
+    .lang-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .lang-radio {
+      width: 22px;
+      height: 22px;
+      border-radius: 11px;
+      border: 2px solid var(--surface-border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lang-card-item.selected .lang-radio {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+    .lang-card-item.selected .lang-radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: #FFFFFF;
+    }
+
+    /* ========================================================
+       3. LOGIN SCREEN (Strictly 2 Clean Options)
+       ======================================================== */
+    .login-container {
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+      background: var(--bg);
+    }
+    .login-top {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .login-card-box {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+    }
+    .login-divider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+      color: var(--text-light);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .login-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--surface-border-strong);
+    }
+    .phone-input-row {
+      display: flex;
+      align-items: center;
+      background: var(--bg-alt);
+      border: 1.5px solid var(--surface-border-strong);
+      border-radius: 10px;
+      height: 48px;
+      margin-bottom: 14px;
+    }
+    .phone-prefix {
+      padding: 0 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 800;
+      border-right: 1px solid var(--surface-border-strong);
+    }
+    .phone-input-field {
+      flex: 1;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      padding: 0 12px;
+      outline: none;
+    }
+
+    /* ========================================================
+       4. 2-STEP ONBOARDING SCREEN
+       ======================================================== */
+    .onboarding-container {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #FFFFFF;
+    }
+    .role-chips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .role-chip-label {
+      background: var(--bg-alt);
+      border: 1.5px solid var(--surface-border-strong);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+    }
+    .role-chip-label.selected {
+      border-color: var(--primary);
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+    }
+    .role-chip-label input {
+      display: none;
+    }
+
+    /* ========================================================
+       5. MAIN TABBED APP CONTAINER & NAVIGATION
+       ======================================================== */
+    .main-app-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding-bottom: 74px; /* Space for bottom tab bar */
+    }
+
+    /* Fixed Top App Bar */
+    .top-app-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-bar-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .top-bar-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+    .top-bar-subtitle {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .top-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chip-lang-switch {
+      background: var(--bg-alt);
+      border: 1px solid var(--surface-border-strong);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .chip-call-btn {
+      background: var(--primary-bg);
+      border: 1px solid #A7F3D0;
+      color: var(--primary-dark);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Fixed Bottom Tab Navigation Bar */
+    .bottom-tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: 64px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--surface-border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 1000;
+      padding: 0 4px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
+    }
+    .tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      gap: 4px;
+      flex: 1;
+      height: 100%;
+      transition: color 0.15s;
+    }
+    .tab-btn.active {
+      color: var(--primary);
+    }
+    .tab-icon {
+      font-size: 20px;
+    }
+
+    /* Tab Content Pages */
+    .tab-content-page {
+      display: none;
+      padding: 14px 16px;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+    .tab-content-page.active {
+      display: block;
+    }
+
+    /* ========================================================
+       HOME TAB STYLING
+       ======================================================== */
+    /* Top Search Bar (Above Carousel) */
+    .home-top-search-wrap {
+      margin-bottom: 14px;
+    }
+    .home-search-box {
+      display: flex;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border-strong);
+      border-radius: 12px;
+      height: 48px;
+      padding: 0 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .home-search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+    .home-search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 0 8px;
+      outline: none;
+    }
+
+    /* 12-Item AutoSlider (Full-width Rectangular) */
+    .home-slider-wrap {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+    }
+    .home-slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .home-slider-box {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: #E2E8F0;
+    }
+    .home-slider-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+    .home-slide-item {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+    .home-slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .home-slide-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.85) 100%);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .home-slide-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #FFFFFF;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    }
+    .home-slide-rate {
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .home-slide-stock {
+      background: rgba(15, 23, 42, 0.8);
+      color: #A7F3D0;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* 4 Core Quick Action Cards */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .quick-action-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 96px;
+      box-shadow: var(--shadow-sm);
+    }
+    .quick-action-card:active {
+      transform: scale(0.98);
+    }
+    .quick-card-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0F172A;
+      margin-top: 4px;
+    }
+    .quick-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Full-width Category Cards */
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .section-main-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0F172A;
+    }
+    .scrap-cat-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .cat-img-box {
+      width: 100%;
+      height: 180px;
+      background: #E2E8F0;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+    .cat-img-tag {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cat-badge-stock {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid #A7F3D0;
+    }
+    .cat-badge-price {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .cat-card-body {
+      padding: 14px;
+    }
+    .cat-item-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #0F172A;
+      margin-bottom: 4px;
+    }
+    .cat-item-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .cat-btn-row {
+      display: flex;
+      gap: 8px;
+      border-top: 1px solid var(--surface-border);
+      padding-top: 12px;
+    }
+    .btn-card-sell {
+      flex: 1;
+      background: var(--primary-bg);
+      border: 1px solid #A7F3D0;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 9px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-card-buy {
+      flex: 1;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 9px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* Missing Scrap Banner */
+    .missing-item-box {
+      background: var(--primary-bg);
+      border: 1.5px dashed #A7F3D0;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* ========================================================
+       FORMS & MODALS (Zero blocking errors)
+       ======================================================== */
+    .form-card-container {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .form-field-group {
+      margin-bottom: 14px;
+    }
+    .form-field-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #1E293B;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .form-field-input {
+      width: 100%;
+      background: var(--bg-alt);
+      border: 1.5px solid var(--surface-border-strong);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #0F172A;
+      font-size: 15px;
+      outline: none;
+    }
+    .form-field-input:focus {
+      background: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    /* Toast Notification */
+    .app-toast {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 9999;
+      display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      border: 1px solid #334155;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    /* Modal Windows */
+    .modal-overlay-wrap {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-overlay-wrap.active {
+      display: flex;
+    }
+    .modal-content-card {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 480px;
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+      padding: 22px 20px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      animation: slideUp 0.25s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .modal-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 10px;
+    }
+
+    /* Orders Tracker Card */
+    .track-order-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .order-status-badge {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Shell -->
+  <div class="app-shell">
+
+    <!-- Toast Notification -->
+    <div class="app-toast" id="appToast">सफलतापूर्वक सबमिट हुआ!</div>
+
+    <!-- ========================================================
+         SCREEN 1: WELCOME SCREEN
+         ======================================================== -->
+    <div class="app-screen active" id="screenWelcome">
+      <div class="welcome-container">
+        <div>
+          <div class="welcome-brand-header">
+            <img src="./assets/branding/app_icon.png" class="welcome-logo-img" alt="Sahi Bhaav Logo">
+            <div class="welcome-app-name" id="welTitle">सही भाव</div>
+            <div class="welcome-app-eng">SAHI BHAAV B2B</div>
+            <div class="welcome-tagline-chip" id="welTagline">⚖️ कबाड़ का सही दाम, सीधा काम</div>
+            <p class="welcome-subtext" id="welSub">
+              न डंडी का डर, न भाव की फिक्र — डीलर्स, ट्रेडर्स और फैक्ट्रियों का भरोसेमंद स्क्रैप साथी।
+            </p>
+          </div>
+
+          <div class="welcome-features-list">
+            <div class="welcome-feat-card">
+              <div class="feat-icon-box">⚖️</div>
+              <div>
+                <div class="feat-title" id="wf1Title">100% सही तोल और भाव</div>
+                <div class="feat-sub" id="wf1Sub">सीधा कंपनी से पारदर्शी सौदा, कोई बिचौलिया नहीं</div>
+              </div>
+            </div>
+            <div class="welcome-feat-card">
+              <div class="feat-icon-box">📞</div>
+              <div>
+                <div class="feat-title" id="wf2Title">30 मिनट में कॉल और पक्की डील</div>
+                <div class="feat-sub" id="wf2Sub">रिक्वेस्ट डालते ही हमारी एक्सपर्ट टीम कॉल करेगी</div>
+              </div>
+            </div>
+            <div class="welcome-feat-card">
+              <div class="feat-icon-box">🏭</div>
+              <div>
+                <div class="feat-title" id="wf3Title">प्लांट व डीलर्स का विश्वास</div>
+                <div class="feat-sub" id="wf3Sub">तुरंत भुगतान और सुरक्षित यार्ड पिकअप</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn-primary-main" onclick="goToScreen('screenLangSelect')">
+            <span id="btnStartText">शुरू करें / Continue →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCREEN 2: LANGUAGE SELECT SCREEN
+         ======================================================== -->
+    <div class="app-screen" id="screenLangSelect">
+      <div class="lang-screen-container">
+        <div>
+          <div class="lang-header">
+            <div style="font-size: 32px; margin-bottom: 8px;">🌐</div>
+            <h2 style="font-size: 22px; font-weight: 900; color: #0F172A;" id="lblLangSelectHead">अपनी भाषा चुनें</h2>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Choose your preferred language</p>
+          </div>
+
+          <div class="lang-cards-wrap">
+            <div class="lang-card-item selected" id="optLangHi" onclick="selectAppLanguage('hi')">
+              <div>
+                <div class="lang-title">🇮🇳 हिन्दी (Hindi)</div>
+                <div class="lang-sub">भारत के सभी स्क्रैप डीलर्स, ट्रेडर्स व यार्ड के लिए</div>
+              </div>
+              <div class="lang-radio"></div>
+            </div>
+
+            <div class="lang-card-item" id="optLangEn" onclick="selectAppLanguage('en')">
+              <div>
+                <div class="lang-title">🌐 English</div>
+                <div class="lang-sub">For industrial recycling plants, smelters & suppliers</div>
+              </div>
+              <div class="lang-radio"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn-primary-main" onclick="goToScreen('screenLogin')">
+            <span id="btnLangNext">आगे बढ़ें / Continue →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCREEN 3: LOGIN SCREEN (Strictly 2 Clean Options)
+         ======================================================== -->
+    <div class="app-screen" id="screenLogin">
+      <div class="login-container">
+        <div>
+          <div class="login-top">
+            <img src="./assets/branding/app_icon.png" style="width: 64px; height: 64px; border-radius: 14px; margin-bottom: 8px;">
+            <h2 style="font-size: 22px; font-weight: 900; color: #0F172A;" id="loginTitle">सही भाव में लॉगिन करें</h2>
+            <p style="font-size: 13px; color: var(--primary); font-weight: 800;" id="loginSub">कबाड़ का सही दाम, सीधा काम</p>
+          </div>
+
+          <div style="margin-top: 28px;">
+            <!-- Option 1: Guest Mode -->
+            <div class="login-card-box">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="background: var(--primary); color: #FFFFFF; font-size: 11px; font-weight: 900; padding: 2px 7px; border-radius: 4px;">1</span>
+                <strong style="color: #0F172A; font-size: 15px;" id="loginGuestTitle">गेस्ट मोड (Instant Guest Access)</strong>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;" id="loginGuestSub">बिना पासवर्ड के तुरंत ऐप एक्सप्लोर करें</p>
+              <button class="btn-primary-main" onclick="handleGuestLogin()">
+                <span id="btnGuestAction">👤 गेस्ट मोड में तुरंत शुरू करें →</span>
+              </button>
+            </div>
+
+            <div class="login-divider-row">
+              <div class="login-divider-line"></div>
+              <span id="loginDividerText">या मोबाइल नंबर से</span>
+              <div class="login-divider-line"></div>
+            </div>
+
+            <!-- Option 2: Phone Login -->
+            <div class="login-card-box">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="background: #334155; color: #FFFFFF; font-size: 11px; font-weight: 900; padding: 2px 7px; border-radius: 4px;">2</span>
+                <strong style="color: #0F172A; font-size: 15px;" id="loginPhoneTitle">मोबाइल नंबर (Phone Number)</strong>
+              </div>
+              <div class="phone-input-row">
+                <span class="phone-prefix">🇮🇳 +91</span>
+                <input type="tel" id="inputLoginPhone" class="phone-input-field" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10">
+              </div>
+              <button class="btn-secondary-main" onclick="handlePhoneLogin()">
+                <span id="btnPhoneAction">📞 आगे बढ़ें (Continue) →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px;">
+          सुरक्षित B2B स्क्रैप नेटवर्क • 100% डेटा गोपनीयता
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCREEN 4: 2-STEP ONBOARDING
+         ======================================================== -->
+    <div class="app-screen" id="screenOnboarding">
+      <div class="onboarding-container">
+        <!-- Step 1: Name and Business Type -->
+        <div id="onboardStep1">
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 12px; font-weight: 800; color: var(--primary);">STEP 1 / 2</div>
+            <h2 style="font-size: 20px; font-weight: 900; color: #0F172A;" id="onb1Title">अपनी प्रोफाइल बनाएं</h2>
+            <p style="font-size: 13px; color: var(--text-muted);" id="onb1Sub">सर्वोत्तम स्क्रैप रेट पाने के लिए अपना विवरण दें</p>
+          </div>
+
+          <div class="form-field-group">
+            <label class="form-field-label" id="lblOnbName">आपका नाम / फर्म नाम</label>
+            <input type="text" id="onbInputName" class="form-field-input" placeholder="उदा. रमेश कुमार / शर्मा मेटल्स">
+          </div>
+
+          <div class="form-field-group">
+            <label class="form-field-label" id="lblOnbRole">आप क्या हैं? (व्यवसाय प्रकार)</label>
+            <div class="role-chips-grid">
+              <label class="role-chip-label selected" onclick="selectRoleChip(this, 'CUSTOMER')">
+                <input type="radio" name="rRole" value="CUSTOMER" checked>
+                👤 ग्राहक (Customer)
+              </label>
+              <label class="role-chip-label" onclick="selectRoleChip(this, 'DEALER')">
+                <input type="radio" name="rRole" value="DEALER">
+                🏪 कबाड़ी / डीलर
+              </label>
+              <label class="role-chip-label" onclick="selectRoleChip(this, 'TRADER')">
+                <input type="radio" name="rRole" value="TRADER">
+                💼 स्क्रैप ट्रेडर
+              </label>
+              <label class="role-chip-label" onclick="selectRoleChip(this, 'PLANT_OWNER')">
+                <input type="radio" name="rRole" value="PLANT_OWNER">
+                🏭 प्लांट / फैक्ट्री
+              </label>
+              <label class="role-chip-label" onclick="selectRoleChip(this, 'SUPPLIER')">
+                <input type="radio" name="rRole" value="SUPPLIER">
+                🚛 स्क्रैप सप्लायर
+              </label>
+              <label class="role-chip-label" onclick="selectRoleChip(this, 'OTHER')">
+                <input type="radio" name="rRole" value="OTHER">
+                ✍️ अन्य (Other)
+              </label>
+            </div>
+          </div>
+
+          <div class="form-field-group" id="boxCustomRole" style="display: none;">
+            <label class="form-field-label">अपना व्यवसाय / काम लिखें</label>
+            <input type="text" id="onbCustomRole" class="form-field-input" placeholder="उदा. रोलिंग मिल, ऑटो डिस्मेंटलिंग...">
+          </div>
+
+          <div style="margin-top: 24px;">
+            <button class="btn-primary-main" onclick="handleOnboardingStep1Next()">
+              <span id="btnOnb1Next">आगे बढ़ें (Next Step) →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: GST Details (Optional) -->
+        <div id="onboardStep2" style="display: none;">
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 12px; font-weight: 800; color: var(--primary);">STEP 2 / 2</div>
+            <h2 style="font-size: 20px; font-weight: 900; color: #0F172A;" id="onb2Title">GST विवरण (वैकल्पिक)</h2>
+            <p style="font-size: 13px; color: var(--text-muted);" id="onb2Sub">यदि GST रजिस्टर्ड हैं तो GSTIN दर्ज करें</p>
+          </div>
+
+          <div class="form-field-group">
+            <label class="form-field-label">GSTIN नंबर (Optional)</label>
+            <input type="text" id="onbInputGstin" class="form-field-input" placeholder="उदा. 23AAAAA0000A1Z5" style="text-transform: uppercase;" maxlength="15">
+          </div>
+
+          <div style="background: var(--primary-bg); border: 1px solid #A7F3D0; border-radius: 10px; padding: 12px; font-size: 13px; color: var(--primary-dark); margin: 16px 0;">
+            💡 GST नंबर अनिवार्य नहीं है। यदि नहीं है तो सीधे 'छोड़ें' दबाएं।
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 24px;">
+            <button class="btn-secondary-main" onclick="handleOnboardingFinal(true)" style="flex: 1;">
+              छोड़ें (Skip)
+            </button>
+            <button class="btn-primary-main" onclick="handleOnboardingFinal(false)" style="flex: 1.6;">
+              सबमिट और शुरू करें →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCREEN 5: MAIN APP CONTAINER WITH BOTTOM TABS
+         ======================================================== -->
+    <div class="app-screen" id="screenMainApp">
+      <!-- Fixed Top Header -->
+      <header class="top-app-bar">
+        <div class="top-bar-brand">
+          <img src="./assets/branding/app_icon.png" class="top-bar-logo" alt="Logo">
+          <div>
+            <div class="top-bar-title" id="appTopTitle">सही भाव</div>
+            <div class="top-bar-subtitle" id="appUserGreeting">नमस्ते, पार्टनर</div>
+          </div>
+        </div>
+        <div class="top-bar-actions">
+          <button class="chip-lang-switch" onclick="toggleLanguageQuick()">
+            🌐 <span id="lblLangQuick">Eng</span>
+          </button>
+          <a href="tel:+919876543210" class="chip-call-btn">
+            📞 कॉल
+          </a>
+        </div>
+      </header>
+
+      <div class="main-app-container">
+
+        <!-- ----------------------------------------------------
+             TAB 1: HOME TAB
+             ---------------------------------------------------- -->
+        <div class="tab-content-page active" id="tabHome">
+          <!-- Top Search Bar (Above Carousel) -->
+          <div class="home-top-search-wrap">
+            <div class="home-search-box">
+              <span style="font-size: 18px; color: var(--text-light);">🔍</span>
+              <input type="text" id="homeSearchInput" class="home-search-input" placeholder="स्क्रैप खोजें... लोहा, तांबा, एल्युमिनियम..." oninput="filterHomeScrap(this.value)">
+              <button id="homeSearchClear" onclick="clearHomeSearch()" style="display:none; background:none; border:none; color:var(--text-light); font-size:16px; cursor:pointer;">✕</button>
+            </div>
+          </div>
+
+          <!-- 12-Item Auto Swiping Deals Carousel -->
+          <div class="home-slider-wrap">
+            <div class="home-slider-header">
+              <div style="font-size: 14px; font-weight: 900; color: #0F172A; display:flex; align-items:center; gap:6px;">
+                <span>✨</span>
+                <span id="lblSliderTitle">आज के लाइव सौदे</span>
+              </div>
+              <div id="lblSliderCount" style="font-size: 12px; font-weight: 800; color: var(--text-light); background: var(--bg-alt); padding: 2px 8px; border-radius: 6px;">1 / 12</div>
+            </div>
+
+            <div class="home-slider-box" onclick="openBuyModalFromActiveSlide()">
+              <div class="home-slider-track" id="homeSliderTrack">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Quick Actions Grid -->
+          <div class="quick-actions-grid">
+            <div class="quick-action-card" onclick="switchTab('sell')" style="border-color: rgba(5, 150, 105, 0.4);">
+              <div style="font-size: 24px;">🟢</div>
+              <div>
+                <div class="quick-card-title" id="qa1Title">कबाड़ बेचें</div>
+                <div class="quick-card-sub" id="qa1Sub">रेट व वजन दर्ज करें →</div>
+              </div>
+            </div>
+            <div class="quick-action-card" onclick="switchTab('buy')" style="border-color: rgba(2, 132, 199, 0.4);">
+              <div style="font-size: 24px;">🔵</div>
+              <div>
+                <div class="quick-card-title" id="qa2Title">कबाड़ खरीदें</div>
+                <div class="quick-card-sub" id="qa2Sub">रेडी स्टॉक कोटेशन →</div>
+              </div>
+            </div>
+            <div class="quick-action-card" onclick="openNewCategoryModal()" style="border-color: rgba(217, 119, 6, 0.4);">
+              <div style="font-size: 24px;">🟡</div>
+              <div>
+                <div class="quick-card-title" id="qa3Title">नई कैटेगरी</div>
+                <div class="quick-card-sub" id="qa3Sub">आइटम जोड़ने का अनुरोध →</div>
+              </div>
+            </div>
+            <div class="quick-action-card" onclick="switchTab('track')" style="border-color: rgba(124, 58, 237, 0.4);">
+              <div style="font-size: 24px;">🟣</div>
+              <div>
+                <div class="quick-card-title" id="qa4Title">ऑर्डर स्टेटस</div>
+                <div class="quick-card-sub" id="qa4Sub">लाइव ट्रैकिंग देखें →</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Rates Banner -->
+          <div style="background: #FFFFFF; border: 1.5px solid var(--surface-border); border-radius: 14px; padding: 12px 14px; margin-bottom: 16px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 900; color: #0F172A;">📊 आज का मंडी बेंचमार्क</div>
+              <div style="font-size: 11px; color: var(--text-muted);">लोहा ₹38/kg • तांबा ₹745/kg • एल्युमिनियम ₹195/kg</div>
+            </div>
+            <button class="btn-card-sell" onclick="switchTab('sell')" style="padding: 6px 12px; font-size: 11px; flex: initial;">
+              रेट देखें
+            </button>
+          </div>
+
+          <!-- Category Inventory Header -->
+          <div class="section-title-row">
+            <h3 class="section-main-title" id="lblCatHeader">📦 स्क्रैप इन्वेंटरी</h3>
+            <span id="lblMatchCount" style="font-size: 12px; color: var(--primary-dark); font-weight: 800;">12 श्रेणियां</span>
+          </div>
+
+          <!-- Full Width Rectangular Category Cards -->
+          <div id="homeCatList">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Missing Item Banner -->
+          <div class="missing-item-box">
+            <div style="font-size: 15px; font-weight: 900; color: #0F172A; margin-bottom: 4px;" id="lblMissingTitle">क्या आपका स्क्रैप लिस्ट में नहीं है?</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;" id="lblMissingSub">कोई भी विशेष मेटल, केबल या मशीनरी जोड़ने के लिए रिक्वेस्ट भेजें।</div>
+            <button class="btn-primary-main" onclick="openNewCategoryModal()" style="padding: 10px; font-size: 13px;">
+              + नई कैटेगरी का अनुरोध भेजें
+            </button>
+          </div>
+        </div>
+
+        <!-- ----------------------------------------------------
+             TAB 2: SELL SCRAP TAB
+             ---------------------------------------------------- -->
+        <div class="tab-content-page" id="tabSell">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 20px; font-weight: 900; color: #0F172A;" id="sellHeadTitle">🟢 कबाड़ बेचें (Sell Scrap)</h2>
+            <p style="font-size: 13px; color: var(--text-muted);" id="sellHeadSub">अपना स्क्रैप चुनें, भाव व वजन डालें और खरीदार पाएं</p>
+          </div>
+
+          <div class="form-card-container">
+            <div class="form-field-group">
+              <label class="form-field-label" id="lblSellCatSelect">स्क्रैप कैटेगरी चुनें</label>
+              <select id="sellCatSelect" class="form-field-input">
+                <!-- Dynamically populated -->
+              </select>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div class="form-field-group">
+                <label class="form-field-label" id="lblSellRate">अपेक्षित भाव (₹/kg)</label>
+                <input type="number" id="sellRateInput" class="form-field-input" placeholder="उदा. 42">
+              </div>
+              <div class="form-field-group">
+                <label class="form-field-label" id="lblSellQty">कुल वजन (kg/ton)</label>
+                <input type="number" id="sellQtyInput" class="form-field-input" placeholder="उदा. 3500">
+              </div>
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-field-label" id="lblSellCondition">स्क्रैप स्थिति</label>
+              <select id="sellConditionSelect" class="form-field-input">
+                <option value="CLEAN">साफ / छांटा हुआ (Clean)</option>
+                <option value="MIXED">मिश्रित / मिक्स स्क्रैप (Mixed)</option>
+                <option value="HEAVY">हैवी इंडस्ट्रियल (Heavy Plant)</option>
+              </select>
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-field-label" id="lblSellCity">उठाने का शहर / यार्ड पता</label>
+              <input type="text" id="sellCityInput" class="form-field-input" placeholder="उदा. इंदौर, मंडी गोबिंदगढ़" value="Indore Industrial Area">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-field-label" id="lblSellPhoto">स्क्रैप की फोटो (वैकल्पिक)</label>
+              <div style="border: 2px dashed #CBD5E1; background: var(--bg-alt); border-radius: 10px; padding: 16px; text-align: center; cursor: pointer;" onclick="document.getElementById('sellPhotoFile').click()">
+                <input type="file" id="sellPhotoFile" accept="image/*" style="display:none;" onchange="handlePhotoAttach(this)">
+                <div style="font-size: 13px; font-weight: 800; color: #0F172A;" id="lblPhotoStatus">📷 फोटो अटैच करने के लिए टैप करें</div>
+                <div style="font-size: 11px; color: var(--text-muted);">फोटो से डील जल्दी फाइनल होती है</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 18px;">
+              <button class="btn-primary-main" onclick="handleSellSubmit()">
+                <span id="btnSellSubmitText">🟢 बेचने के लिए सबमिट करें (Post Offer) →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ----------------------------------------------------
+             TAB 3: BUY SCRAP TAB
+             ---------------------------------------------------- -->
+        <div class="tab-content-page" id="tabBuy">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 20px; font-weight: 900; color: #0F172A;" id="buyHeadTitle">🔵 कबाड़ खरीदें (Ready Stock)</h2>
+            <p style="font-size: 13px; color: var(--text-muted);" id="buyHeadSub">कंपनी का उपलब्ध रेडी स्टॉक देखें और कोटेशन मांगें</p>
+          </div>
+
+          <div id="buyStockList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- ----------------------------------------------------
+             TAB 4: TRACK ORDERS TAB
+             ---------------------------------------------------- -->
+        <div class="tab-content-page" id="tabTrack">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 20px; font-weight: 900; color: #0F172A;" id="trackHeadTitle">🟣 ऑर्डर ट्रैकिंग (Live Status)</h2>
+            <p style="font-size: 13px; color: var(--text-muted);" id="trackHeadSub">आपके सभी बेचने, खरीदने और नई कैटेगरी अनुरोधों की स्थिति</p>
+          </div>
+
+          <!-- Tracker Filter Chips -->
+          <div style="display: flex; gap: 8px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px;">
+            <button class="chip-lang-switch" id="tFilterAll" onclick="filterTrackOrders('ALL')" style="background: var(--primary); color: #FFFFFF; border-color: var(--primary);">सभी (All)</button>
+            <button class="chip-lang-switch" id="tFilterSell" onclick="filterTrackOrders('SELL')">बेचने के (Sell)</button>
+            <button class="chip-lang-switch" id="tFilterBuy" onclick="filterTrackOrders('BUY')">खरीदने के (Buy)</button>
+            <button class="chip-lang-switch" id="tFilterCat" onclick="filterTrackOrders('CAT')">कैटेगरी (Category)</button>
+          </div>
+
+          <div id="trackOrdersList">
+            <!-- Dynamically populated from localStorage -->
+          </div>
+        </div>
+
+        <!-- ----------------------------------------------------
+             TAB 5: PROFILE TAB
+             ---------------------------------------------------- -->
+        <div class="tab-content-page" id="tabProfile">
+          <div style="margin-bottom: 16px;">
+            <h2 style="font-size: 20px; font-weight: 900; color: #0F172A;" id="profHeadTitle">👤 प्रोफाइल एवं खाता</h2>
+          </div>
+
+          <!-- Profile Badge Card -->
+          <div class="form-card-container" style="margin-bottom: 14px; text-align: center;">
+            <div style="width: 68px; height: 68px; border-radius: 34px; background: var(--primary-bg); color: var(--primary-dark); font-size: 28px; font-weight: 900; display:flex; align-items:center; justify-content:center; margin: 0 auto 10px auto; border: 2px solid #A7F3D0;">
+              👤
+            </div>
+            <div style="font-size: 18px; font-weight: 900; color: #0F172A;" id="profDisplayName">Guest Trader</div>
+            <div style="display: inline-block; background: var(--primary-bg); color: var(--primary-dark); font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 6px; margin: 4px 0 10px 0;" id="profDisplayRole">
+              🏪 कबाड़ी / डीलर (Verified)
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);" id="profDisplayPhone">📞 +91 98000 00000</div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-top: 2px;" id="profDisplayGst">🏢 GSTIN: 23AAAAA0000A1Z5</div>
+          </div>
+
+          <!-- Action Buttons in Profile -->
+          <div class="form-card-container" style="display:flex; flex-direction:column; gap:10px;">
+            <button class="btn-secondary-main" onclick="toggleLanguageQuick()">
+              🌐 <span id="btnProfLang">भाषा बदलें (Switch to English)</span>
+            </button>
+            <button class="btn-secondary-main" onclick="openNewCategoryModal()">
+              🟡 <span id="btnProfNewCat">नई स्क्रैप कैटेगरी का अनुरोध</span>
+            </button>
+            <a href="tel:+919876543210" class="btn-secondary-main" style="color: var(--primary-dark); border-color: #A7F3D0; background: var(--primary-bg);">
+              📞 24x7 हेल्पलाइन सपोर्ट
+            </a>
+            <button class="btn-secondary-main" onclick="resetFullAppFlow()" style="color: #DC2626; border-color: #FCA5A5; background: #FEF2F2; margin-top: 8px;">
+              🔄 रीसेट एवं शुरू से टेस्ट करें (Replay Onboarding)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Fixed Bottom App Navigation Bar -->
+      <nav class="bottom-tab-bar">
+        <button class="tab-btn active" id="btnTabHome" onclick="switchTab('home')">
+          <span class="tab-icon">🏠</span>
+          <span id="lblNavHome">होम</span>
+        </button>
+        <button class="tab-btn" id="btnTabSell" onclick="switchTab('sell')">
+          <span class="tab-icon">🟢</span>
+          <span id="lblNavSell">बेचें</span>
+        </button>
+        <button class="tab-btn" id="btnTabBuy" onclick="switchTab('buy')">
+          <span class="tab-icon">🔵</span>
+          <span id="lblNavBuy">खरीदें</span>
+        </button>
+        <button class="tab-btn" id="btnTabTrack" onclick="switchTab('track')">
+          <span class="tab-icon">🟣</span>
+          <span id="lblNavTrack">ट्रैकिंग</span>
+        </button>
+        <button class="tab-btn" id="btnTabProfile" onclick="switchTab('profile')">
+          <span class="tab-icon">👤</span>
+          <span id="lblNavProfile">खाता</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================
+         MODAL: BUY INQUIRY MODAL (With 30-min call guarantee)
+         ======================================================== -->
+    <div class="modal-overlay-wrap" id="modalBuy">
+      <div class="modal-content-card">
+        <div class="modal-head-row">
+          <h3 style="font-size: 18px; font-weight: 900; color: #0F172A;" id="lblBuyModalHead">खरीद पूछताछ (Request Quote)</h3>
+          <button onclick="closeBuyModal()" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-light);">✕</button>
+        </div>
+
+        <div style="background: var(--accent-bg); border: 1px solid #FCD34D; border-radius: 10px; padding: 12px; display:flex; gap:10px; margin-bottom: 14px;">
+          <span style="font-size: 24px;">📞</span>
+          <div style="font-size: 12px; color: #92400E; line-height: 1.45; font-weight: 600;" id="lblBuyModalNotice">
+            <strong>कंपनी सूचना:</strong> सबमिट करते ही हमारी सेल्स टीम 30 मिनट में आपको कॉल करके रेट, डिलीवरी व तोल पर पक्की डील करेगी।
+          </div>
+        </div>
+
+        <input type="hidden" id="buyModalCatId">
+        <div class="form-field-group">
+          <label class="form-field-label">स्क्रैप मटेरियल</label>
+          <input type="text" id="buyModalItemName" class="form-field-input" readonly>
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-field-label">आवश्यक मात्रा (वजन kg/ton)</label>
+          <input type="number" id="buyModalQty" class="form-field-input" placeholder="उदा. 2000 kg या 5 Ton">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-field-label">डिलीवरी लोकेशन / प्लांट</label>
+          <input type="text" id="buyModalCity" class="form-field-input" placeholder="उदा. पीथमपुर, सेक्टर 3" value="Indore Smelter Plant">
+        </div>
+
+        <div style="margin-top: 18px;">
+          <button class="btn-primary-main" onclick="handleBuySubmit()">
+            रिक्वेस्ट भेजें (हम कॉल करेंगे) →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         MODAL: NEW CUSTOM CATEGORY REQUEST MODAL
+         ======================================================== -->
+    <div class="modal-overlay-wrap" id="modalNewCat">
+      <div class="modal-content-card">
+        <div class="modal-head-row">
+          <h3 style="font-size: 18px; font-weight: 900; color: #0F172A;">नई कैटेगरी / आइटम का अनुरोध</h3>
+          <button onclick="closeNewCategoryModal()" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-light);">✕</button>
+        </div>
+
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+          यदि आपका स्क्रैप लिस्टेड नहीं है, तो विवरण दर्ज करें। टीम 24 घंटे में इसे जोड़ देगी:
+        </p>
+
+        <div class="form-field-group">
+          <label class="form-field-label">स्क्रैप आइटम का नाम</label>
+          <input type="text" id="newCatName" class="form-field-input" placeholder="उदा. लेड आर्मर्ड केबल, इंसुलेटेड तार">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-field-group">
+            <label class="form-field-label">आपका इरादा</label>
+            <select id="newCatIntent" class="form-field-input">
+              <option value="SELL">🟢 बेचना है (Sell)</option>
+              <option value="BUY">🔵 खरीदना है (Buy)</option>
+            </select>
+          </div>
+          <div class="form-field-group">
+            <label class="form-field-label">अनुमानित मात्रा (kg)</label>
+            <input type="number" id="newCatQty" class="form-field-input" placeholder="उदा. 1500">
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;">
+          <button class="btn-primary-main" onclick="handleCategorySubmit()">
+            अनुरोध सबमिट करें →
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End App Shell -->
+
+  <script>
+    // 12 High-Impact Scrap Catalog Data
+    const SCRAP_ITEMS = [
+      { id: "iron-steel", nameHi: "लोहा और एमएस स्क्रैप (HMS 1)", nameEn: "Iron & Steel Scrap (HMS 1)", rateBuy: 38, rateSell: 41, stock: "45,000 kg", unit: "kg", img: "./assets/scrap/iron_steel_scrap.png", descHi: "HMS 1, सरिया कटिंग, लोहे के गार्डर", descEn: "HMS 1 & 2, rebar cuts, industrial beams", trend: "+ ₹0.50 (तेजी)" },
+      { id: "copper", nameHi: "तांबा मिलबेरी तार (99.9%)", nameEn: "Bright Copper Millberry (99.9%)", rateBuy: 745, rateSell: 770, stock: "6,200 kg", unit: "kg", img: "./assets/scrap/copper_scrap.png", descHi: "चमकदार मिलबेरी तार, मोटर आर्मेचर, पाइप", descEn: "Bright millberry wire, tubes, heavy copper", trend: "+ ₹5.00 (तेजी)" },
+      { id: "aluminium", nameHi: "एल्युमिनियम 6063 प्रोफाइल", nameEn: "Aluminium Extrusion 6063", rateBuy: 195, rateSell: 210, stock: "18,500 kg", unit: "kg", img: "./assets/scrap/aluminium_scrap.png", descHi: "सेक्शन प्रोफाइल 6063, अलॉय व्हील", descEn: "Clean 6063 extrusion, wheel rims, utensils", trend: "स्थिर (Stable)" },
+      { id: "brass", nameHi: "पीला हनी पीतल (Honey Brass)", nameEn: "Yellow Honey Brass Scrap", rateBuy: 460, rateSell: 485, stock: "8,400 kg", unit: "kg", img: "./assets/scrap/brass_scrap.png", descHi: "हनी पीतल, नल फिटिंग वाल्व, छिलाई", descEn: "Yellow honey brass, plumbing valves", trend: "+ ₹2.00 (तेजी)" },
+      { id: "stainless-steel", nameHi: "स्टेनलेस स्टील SS 304", nameEn: "Stainless Steel SS 304", rateBuy: 130, rateSell: 145, stock: "12,000 kg", unit: "kg", img: "./assets/scrap/stainless_steel_scrap.png", descHi: "SS 304 नॉन-मैग्नेटिक चद्दर व पाइप", descEn: "SS 304 & 316 industrial cutouts", trend: "स्थिर (Stable)" },
+      { id: "lead-battery", nameHi: "लेड व इनवर्टर बैटरी स्क्रैप", nameEn: "Lead Acid Batteries Scrap", rateBuy: 98, rateSell: 108, stock: "14,000 kg", unit: "kg", img: "./assets/scrap/battery_lead_scrap.png", descHi: "पुरानी इनवर्टर व ट्रक बैटरी, लेड सिल्लियां", descEn: "Automotive 12V & inverter scrap batteries", trend: "+ ₹1.00 (तेजी)" },
+      { id: "ewaste", nameHi: "ई-वेस्ट मदरबोर्ड व चिप्स", nameEn: "E-Waste Motherboard PCBs", rateBuy: 180, rateSell: 220, stock: "4,200 kg", unit: "kg", img: "./assets/scrap/ewaste_scrap1.png", descHi: "कंप्यूटर मदरबोर्ड, सर्वर बोर्ड, चिप्स", descEn: "Grade A server boards, CPUs, RAM PCBs", trend: "+ ₹3.00 (तेजी)" },
+      { id: "machinery-motors", nameHi: "इंडस्ट्रियल 3-फेज मोटर व मशीनरी", nameEn: "Heavy Electric Motors & Plant", rateBuy: 46000, rateSell: 49500, stock: "25 Ton", unit: "ton", img: "./assets/scrap/machinery_motor_scrap.png", descHi: "3-फेज मोटर, गियरबॉक्स, पूरी फैक्ट्री डिस्मेंटलिंग", descEn: "3-phase motors, pumps, factory dismantling", trend: "स्थिर (Stable)" },
+      { id: "plastic", nameHi: "प्लास्टिक एचडीपीई नीले ड्रम", nameEn: "HDPE Chemical Drums Scrap", rateBuy: 32, rateSell: 38, stock: "22,000 kg", unit: "kg", img: "./assets/scrap/plastic_scrap.png", descHi: "नीले एचडीपीई ड्रम, पीईटी बोतल, क्रेट्स", descEn: "Blue HDPE drums, PET flakes, crates", trend: "स्थिर (Stable)" },
+      { id: "paper-cardboard", nameHi: "गत्ता व क्राफ्ट पेटियां (OCC)", nameEn: "OCC Cardboard Carton Bales", rateBuy: 14, rateSell: 16.5, stock: "35,000 kg", unit: "kg", img: "./assets/scrap/paper_cardboard_scrap.png", descHi: "प्रेस की हुई गत्ते की पेटियां (OCC), रद्दी अखबार", descEn: "Pressed corrugated cardboard carton bales", trend: "- ₹0.25 (मंदी)" },
+      { id: "tyres", nameHi: "ट्रक व रेडियल टायर स्क्रैप", nameEn: "Whole Radial Truck Tyres", rateBuy: 12500, rateSell: 14000, stock: "40 Ton", unit: "ton", img: "./assets/scrap/tyre_rubber_scrap.png", descHi: "पायरोलिसिस व कटिंग ग्रेड ट्रक टायर", descEn: "Pyrolysis & retreading grade truck tyres", trend: "स्थिर (Stable)" },
+      { id: "auto-parts", nameHi: "गाड़ियों का कबाड़ व इंजन ब्लॉक", nameEn: "Automobile Scrap & Engine Blocks", rateBuy: 44, rateSell: 48, stock: "16,000 kg", unit: "kg", img: "./assets/scrap/vehicle_auto_scrap.png", descHi: "कटी हुई गाड़ियां, इंजन ब्लॉक, ब्रेक ड्रम", descEn: "Dismantled chassis, engine blocks, brake drums", trend: "+ ₹0.50 (तेजी)" }
+    ];
+
+    let currentAppLang = localStorage.getItem("sahibhaav_lang") || "hi";
+    let activeTrackFilter = "ALL";
+    let homeSearchQuery = "";
+    let selectedUserRole = "CUSTOMER";
+    let tempUserPhone = "+91 98000 00000";
+    let tempIsGuest = true;
+    let heroSliderIndex = 0;
+
+    // Toast Utility
+    function showToast(msg) {
+      const toast = document.getElementById("appToast");
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.style.display = "block";
+      setTimeout(() => {
+        toast.style.display = "none";
+      }, 2500);
+    }
+
+    // Navigation Between Screens
+    function goToScreen(screenId) {
+      document.querySelectorAll(".app-screen").forEach(s => s.classList.remove("active"));
+      const target = document.getElementById(screenId);
+      if (target) {
+        target.classList.add("active");
+        window.scrollTo(0, 0);
+      }
+    }
+
+    // Bottom Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content-page").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+      const targetPage = document.getElementById("tab" + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+      const targetBtn = document.getElementById("btnTab" + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+
+      if (targetPage) targetPage.classList.add("active");
+      if (targetBtn) targetBtn.classList.add("active");
+      window.scrollTo(0, 0);
+
+      if (tabId === "track") {
+        renderTrackOrders();
+      }
+    }
+
+    // Language Selection
+    function selectAppLanguage(lang) {
+      currentAppLang = lang;
+      localStorage.setItem("sahibhaav_lang", lang);
+      document.getElementById("optLangHi").classList.toggle("selected", lang === "hi");
+      document.getElementById("optLangEn").classList.toggle("selected", lang === "en");
+      updateTextsForLanguage();
+    }
+
+    function toggleLanguageQuick() {
+      selectAppLanguage(currentAppLang === "hi" ? "en" : "hi");
+    }
+
+    // Role Chip Selection
+    function selectRoleChip(el, role) {
+      document.querySelectorAll(".role-chip-label").forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      selectedUserRole = role;
+      document.getElementById("boxCustomRole").style.display = role === "OTHER" ? "block" : "none";
+    }
+
+    // Login Form Handlers (ZERO BLOCKING ERRORS)
+    function handleGuestLogin() {
+      tempIsGuest = true;
+      tempUserPhone = "+91 98000 00000";
+      goToScreen("screenOnboarding");
+    }
+
+    function handlePhoneLogin() {
+      const input = document.getElementById("inputLoginPhone").value.trim();
+      tempIsGuest = false;
+      tempUserPhone = input ? "+91 " + input : "+91 98765 43210";
+      goToScreen("screenOnboarding");
+    }
+
+    // Onboarding Handlers (ZERO BLOCKING ERRORS)
+    function handleOnboardingStep1Next() {
+      const name = document.getElementById("onbInputName").value.trim();
+      // Even if blank, do not block! Gracefully assign default
+      document.getElementById("onboardStep1").style.display = "none";
+      document.getElementById("onboardStep2").style.display = "block";
+    }
+
+    function handleOnboardingFinal(skippedGst) {
+      const inputName = document.getElementById("onbInputName").value.trim();
+      const userName = inputName || (tempIsGuest ? "Guest Trader (पार्टनर)" : "Scrap Partner");
+      const gstin = skippedGst ? "" : (document.getElementById("onbInputGstin").value.trim().toUpperCase() || "23AAAAA0000A1Z5");
+      const customRole = document.getElementById("onbCustomRole").value.trim();
+
+      const profile = {
+        name: userName,
+        role: selectedUserRole,
+        customRole,
+        gstin,
+        phone: tempUserPhone,
+        isGuest: tempIsGuest,
+        isOnboarded: true
+      };
+
+      localStorage.setItem("sahibhaav_user", JSON.stringify(profile));
+      localStorage.setItem("sahibhaav_flow_completed", "true");
+      applyProfileUI(profile);
+      showToast(currentAppLang === "hi" ? `स्वागत है ${userName}!` : `Welcome ${userName}!`);
+      goToScreen("screenMainApp");
+      switchTab("home");
+    }
+
+    function applyProfileUI(p) {
+      const greeting = document.getElementById("appUserGreeting");
+      const dName = document.getElementById("profDisplayName");
+      const dRole = document.getElementById("profDisplayRole");
+      const dPhone = document.getElementById("profDisplayPhone");
+      const dGst = document.getElementById("profDisplayGst");
+
+      const roleMap = {
+        CUSTOMER: "👤 ग्राहक (Customer)",
+        DEALER: "🏪 कबाड़ी / डीलर (Dealer)",
+        TRADER: "💼 स्क्रैप ट्रेडर (Trader)",
+        PLANT_OWNER: "🏭 प्लांट / फैक्ट्री (Plant Owner)",
+        SUPPLIER: "🚛 स्क्रैप सप्लायर (Supplier)",
+        OTHER: p.customRole ? `✍️ ${p.customRole}` : "✍️ अन्य (Partner)"
+      };
+
+      if (greeting) greeting.innerText = `नमस्ते, ${p.name.split(' ')[0]}`;
+      if (dName) dName.innerText = p.name;
+      if (dRole) dRole.innerText = roleMap[p.role] || "Scrap Partner";
+      if (dPhone) dPhone.innerText = "📞 " + p.phone;
+      if (dGst) dGst.innerText = p.gstin ? "🏢 GSTIN: " + p.gstin : "🏢 GST: लागू नहीं (Unregistered)";
+    }
+
+    function resetFullAppFlow() {
+      localStorage.removeItem("sahibhaav_flow_completed");
+      goToScreen("screenWelcome");
+      showToast("ऑनबोर्डिंग टेस्ट शुरू हो गई!");
+    }
+
+    // AutoSlider on Home
+    function renderHomeSlider() {
+      const track = document.getElementById("homeSliderTrack");
+      if (!track) return;
+      track.innerHTML = "";
+
+      SCRAP_ITEMS.forEach((item, idx) => {
+        const title = currentAppLang === "hi" ? item.nameHi : item.nameEn;
+        track.innerHTML += `
+          <div class="home-slide-item" onclick="openBuyModal('${item.id}', '${title}')">
+            <img src="${item.img}" class="home-slide-img" alt="${title}">
+            <div class="home-slide-scrim">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="home-slide-stock">📦 स्टॉक: ${item.stock}</span>
+                <span class="home-slide-rate">₹${item.rateBuy}/${item.unit}</span>
+              </div>
+              <div>
+                <div class="home-slide-title">${title}</div>
+                <div style="color:#A7F3D0; font-size:12px; font-weight:800;">सौदा फाइनल करने के लिए टैप करें →</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function autoMoveSlider() {
+      heroSliderIndex = (heroSliderIndex + 1) % SCRAP_ITEMS.length;
+      const track = document.getElementById("homeSliderTrack");
+      const counter = document.getElementById("lblSliderCount");
+      if (track) {
+        track.style.transform = `translateX(-${heroSliderIndex * 100}%)`;
+      }
+      if (counter) {
+        counter.innerText = `${heroSliderIndex + 1} / ${SCRAP_ITEMS.length}`;
+      }
+    }
+    setInterval(autoMoveSlider, 3200);
+
+    function openBuyModalFromActiveSlide() {
+      const item = SCRAP_ITEMS[heroSliderIndex];
+      if (item) {
+        const title = currentAppLang === "hi" ? item.nameHi : item.nameEn;
+        openBuyModal(item.id, title);
+      }
+    }
+
+    // Category Inventory Rendering
+    function renderHomeCategories() {
+      const list = document.getElementById("homeCatList");
+      const sellSelect = document.getElementById("sellCatSelect");
+      const matchLabel = document.getElementById("lblMatchCount");
+      if (!list) return;
+      list.innerHTML = "";
+      if (sellSelect) sellSelect.innerHTML = "";
+
+      const filtered = SCRAP_ITEMS.filter(it => {
+        if (!homeSearchQuery) return true;
+        const q = homeSearchQuery.toLowerCase();
+        return it.nameHi.toLowerCase().includes(q) || it.nameEn.toLowerCase().includes(q) || it.descHi.toLowerCase().includes(q) || it.descEn.toLowerCase().includes(q);
+      });
+
+      if (matchLabel) {
+        matchLabel.innerText = `${filtered.length} उपलब्ध`;
+      }
+
+      if (filtered.length === 0) {
+        list.innerHTML = `
+          <div style="background:#FFFFFF; border:1.5px solid var(--surface-border); border-radius:14px; padding:32px 16px; text-align:center;">
+            <div style="font-size:32px; margin-bottom:6px;">🔍</div>
+            <div style="font-size:16px; font-weight:900; color:#0F172A;">कोई आइटम नहीं मिला</div>
+            <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">अगर यह लिस्ट में नहीं है तो तुरंत नई कैटेगरी का अनुरोध भेजें</div>
+            <button class="btn-primary-main" onclick="openNewCategoryModal()" style="padding:10px;">+ नई कैटेगरी अनुरोध</button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(it => {
+        const title = currentAppLang === "hi" ? it.nameHi : it.nameEn;
+        const desc = currentAppLang === "hi" ? it.descHi : it.descEn;
+
+        list.innerHTML += `
+          <div class="scrap-cat-card">
+            <div class="cat-img-box">
+              <img src="${it.img}" class="cat-img-tag" alt="${title}">
+              <div class="cat-badge-stock">उपलब्ध: ${it.stock}</div>
+              <div class="cat-badge-price">₹${it.rateBuy}/${it.unit}</div>
+            </div>
+            <div class="cat-card-body">
+              <div class="cat-item-title">${title}</div>
+              <div class="cat-item-desc">${desc}</div>
+              <div class="cat-btn-row">
+                <button class="btn-card-sell" onclick="prefillSellForm('${it.id}', '${it.rateBuy}')">
+                  🟢 कबाड़ बेचें
+                </button>
+                <button class="btn-card-buy" onclick="openBuyModal('${it.id}', '${title}')">
+                  🔵 खरीदें कोटेशन
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        if (sellSelect) {
+          sellSelect.innerHTML += `<option value="${it.id}">${title} (भाव: ₹${it.rateBuy}/${it.unit})</option>`;
+        }
+      });
+    }
+
+    function filterHomeScrap(val) {
+      homeSearchQuery = (val || "").trim();
+      document.getElementById("homeSearchClear").style.display = homeSearchQuery ? "block" : "none";
+      renderHomeCategories();
+    }
+
+    function clearHomeSearch() {
+      document.getElementById("homeSearchInput").value = "";
+      filterHomeScrap("");
+    }
+
+    // Buy Screen Inventory
+    function renderBuyStock() {
+      const container = document.getElementById("buyStockList");
+      if (!container) return;
+      container.innerHTML = "";
+
+      SCRAP_ITEMS.forEach(it => {
+        const title = currentAppLang === "hi" ? it.nameHi : it.nameEn;
+        container.innerHTML += `
+          <div class="scrap-cat-card">
+            <div class="cat-img-box">
+              <img src="${it.img}" class="cat-img-tag" alt="${title}">
+              <div class="cat-badge-stock">रेडी स्टॉक: ${it.stock}</div>
+              <div class="cat-badge-price">₹${it.rateBuy}/${it.unit}</div>
+            </div>
+            <div class="cat-card-body">
+              <div class="cat-item-title">${title}</div>
+              <div style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">धर्मकाँटा तोल प्रमाणित • तत्काल प्लांट लोडिंग</div>
+              <button class="btn-primary-main" onclick="openBuyModal('${it.id}', '${title}')" style="padding:11px; font-size:14px;">
+                🔵 खरीद पूछताछ भेजें (Get Quote) →
+              </button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Pre-fill Sell Form and Switch Tab
+    function prefillSellForm(catId, rate) {
+      switchTab("sell");
+      const select = document.getElementById("sellCatSelect");
+      if (select) select.value = catId;
+      const rateInp = document.getElementById("sellRateInput");
+      if (rateInp) rateInp.value = rate;
+    }
+
+    function handlePhotoAttach(inp) {
+      if (inp.files && inp.files[0]) {
+        document.getElementById("lblPhotoStatus").innerText = "✓ फोटो चुनी गई: " + inp.files[0].name;
+      }
+    }
+
+    // Form Submissions (Zero blocking errors)
+    function handleSellSubmit() {
+      const select = document.getElementById("sellCatSelect");
+      const catText = select.options[select.selectedIndex]?.text.split(" (")[0] || "Iron & Steel Scrap";
+      const rate = document.getElementById("sellRateInput").value || "40";
+      const qty = document.getElementById("sellQtyInput").value || "1200";
+      const city = document.getElementById("sellCityInput").value || "Indore Yard";
+
+      const order = {
+        id: "SB-S" + Math.floor(1000 + Math.random() * 9000),
+        type: "SELL",
+        item: catText,
+        qty: qty + " kg",
+        rate: "₹" + rate + "/kg",
+        status: "समीक्षा में (Under Review)",
+        statusClass: "color: #B45309; background: var(--accent-bg);",
+        city,
+        date: new Date().toISOString().replace('T', ' ').substring(0, 16)
+      };
+
+      const existing = JSON.parse(localStorage.getItem("sahibhaav_orders") || "[]");
+      existing.unshift(order);
+      localStorage.setItem("sahibhaav_orders", JSON.stringify(existing));
+
+      showToast(`सफलतापूर्वक दर्ज! ऑर्डर #${order.id}`);
+      switchTab("track");
+    }
+
+    function openBuyModal(catId, title) {
+      document.getElementById("buyModalCatId").value = catId;
+      document.getElementById("buyModalItemName").value = title;
+      document.getElementById("modalBuy").classList.add("active");
+    }
+    function closeBuyModal() {
+      document.getElementById("modalBuy").classList.remove("active");
+    }
+
+    function handleBuySubmit() {
+      const item = document.getElementById("buyModalItemName").value || "Scrap";
+      const qty = document.getElementById("buyModalQty").value || "1000";
+      const city = document.getElementById("buyModalCity").value || "Plant Yard";
+
+      const inquiry = {
+        id: "SB-B" + Math.floor(1000 + Math.random() * 9000),
+        type: "BUY",
+        item,
+        qty: qty + " kg",
+        rate: "कोटेशन कॉल पेंडिंग",
+        status: "कॉल शेड्यूल्ड (Call Scheduled)",
+        statusClass: "color: #0369A1; background: var(--blue-bg);",
+        city,
+        date: new Date().toISOString().replace('T', ' ').substring(0, 16)
+      };
+
+      const existing = JSON.parse(localStorage.getItem("sahibhaav_orders") || "[]");
+      existing.unshift(inquiry);
+      localStorage.setItem("sahibhaav_orders", JSON.stringify(existing));
+
+      closeBuyModal();
+      showToast(`पूछताछ दर्ज! ID: #${inquiry.id} (30 मिनट में कॉल होगी)`);
+      switchTab("track");
+    }
+
+    function openNewCategoryModal() {
+      document.getElementById("modalNewCat").classList.add("active");
+    }
+    function closeNewCategoryModal() {
+      document.getElementById("modalNewCat").classList.remove("active");
+    }
+
+    function handleCategorySubmit() {
+      const name = document.getElementById("newCatName").value || "Custom Alloy Scrap";
+      const intent = document.getElementById("newCatIntent").value;
+      const qty = document.getElementById("newCatQty").value || "500";
+
+      const catReq = {
+        id: "SB-CR" + Math.floor(1000 + Math.random() * 9000),
+        type: intent === "SELL" ? "CAT_SELL" : "CAT_BUY",
+        item: name + " (नई कस्टम कैटेगरी)",
+        qty: qty + " kg",
+        rate: "-",
+        status: "समीक्षा में (Under Review)",
+        statusClass: "color: #B45309; background: var(--accent-bg);",
+        city: "Custom Addition",
+        date: new Date().toISOString().replace('T', ' ').substring(0, 16)
+      };
+
+      const existing = JSON.parse(localStorage.getItem("sahibhaav_orders") || "[]");
+      existing.unshift(catReq);
+      localStorage.setItem("sahibhaav_orders", JSON.stringify(existing));
+
+      closeNewCategoryModal();
+      showToast("अनुरोध प्राप्त हुआ! समीक्षा के बाद जोड़ दिया जाएगा।");
+      switchTab("track");
+    }
+
+    // Orders Tracker Rendering
+    function filterTrackOrders(f) {
+      activeTrackFilter = f;
+      document.querySelectorAll("#tabTrack .chip-lang-switch").forEach(b => {
+        b.style.background = "var(--bg-alt)";
+        b.style.color = "var(--text)";
+        b.style.borderColor = "var(--surface-border-strong)";
+      });
+      const activeBtn = document.getElementById("tFilter" + f.charAt(0) + f.slice(1).toLowerCase());
+      if (activeBtn) {
+        activeBtn.style.background = "var(--primary)";
+        activeBtn.style.color = "#FFFFFF";
+        activeBtn.style.borderColor = "var(--primary)";
+      }
+      renderTrackOrders();
+    }
+
+    function renderTrackOrders() {
+      const container = document.getElementById("trackOrdersList");
+      if (!container) return;
+
+      if (!localStorage.getItem("sahibhaav_orders")) {
+        const defaultOrders = [
+          { id: "SB-S8821", type: "SELL", item: "Iron & Steel Scrap (लोहा - HMS 1)", qty: "3,500 kg", rate: "₹39/kg", status: "सौदा फाइनल (Deal Finalized)", statusClass: "color: #047857; background: var(--primary-bg);", city: "Indore Yard", date: "2026-10-12 14:30" },
+          { id: "SB-B8822", type: "BUY", item: "Copper Scrap (तांबा मिलबेरी)", qty: "800 kg", rate: "₹765/kg", status: "कॉल शेड्यूल्ड (Call Scheduled)", statusClass: "color: #0369A1; background: var(--blue-bg);", city: "Ahmedabad Plant", date: "2026-10-13 11:15" },
+          { id: "SB-CR8823", type: "CAT", item: "Lead Cable (लेड आर्मर्ड केबल)", qty: "1,200 kg", rate: "-", status: "समीक्षा में (Under Review)", statusClass: "color: #B45309; background: var(--accent-bg);", city: "Custom Request", date: "2026-10-13 16:45" }
+        ];
+        localStorage.setItem("sahibhaav_orders", JSON.stringify(defaultOrders));
+      }
+
+      const orders = JSON.parse(localStorage.getItem("sahibhaav_orders") || "[]");
+      const filtered = orders.filter(o => {
+        if (activeTrackFilter === "ALL") return true;
+        if (activeTrackFilter === "SELL" && o.type === "SELL") return true;
+        if (activeTrackFilter === "BUY" && o.type === "BUY") return true;
+        if (activeTrackFilter === "CAT" && (o.type === "CAT" || o.type.includes("CAT"))) return true;
+        return false;
+      });
+
+      container.innerHTML = "";
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="background:#FFFFFF; border:1.5px solid var(--surface-border); border-radius:14px; padding:36px 16px; text-align:center; color:var(--text-muted);">
+            <div style="font-size:32px; margin-bottom:6px;">📦</div>
+            <div style="font-size:16px; font-weight:900; color:#0F172A;">अभी कोई ऑर्डर नहीं मिला</div>
+            <div style="font-size:13px; margin-top:4px;">कबाड़ बेचने या खरीदने का नया अनुरोध सबमिट करें</div>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(o => {
+        const isSell = o.type === "SELL";
+        const isBuy = o.type === "BUY";
+        container.innerHTML += `
+          <div class="track-order-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:11px; font-weight:800; padding:3px 8px; border-radius:5px; ${isSell ? 'background:var(--primary-bg); color:var(--primary-dark);' : isBuy ? 'background:var(--blue-bg); color:var(--blue);' : 'background:var(--accent-bg); color:var(--accent);'}">
+                ${isSell ? '🟢 बेचने का ऑर्डर' : isBuy ? '🔵 खरीद पूछताछ' : '🟡 नई कैटेगरी'}
+              </span>
+              <span style="font-size:12px; color:var(--text-light); font-weight:800;">#${o.id}</span>
+            </div>
+            <div style="font-size:16px; font-weight:900; color:#0F172A; margin-bottom:6px;">${o.item}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--text-muted); border-top:1px solid var(--surface-border); padding-top:8px; margin-top:8px;">
+              <span>मात्रा: <strong>${o.qty}</strong></span>
+              <span>रेट: <strong style="color:var(--primary-dark);">${o.rate}</strong></span>
+              <span class="order-status-badge" style="${o.statusClass}">${o.status.split(' (')[0]}</span>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Multilingual Texts Update
+    function updateTextsForLanguage() {
+      const isHi = currentAppLang === "hi";
+      document.getElementById("lblLangQuick").innerText = isHi ? "Eng" : "हिन्दी";
+
+      // Nav labels
+      document.getElementById("lblNavHome").innerText = isHi ? "होम" : "Home";
+      document.getElementById("lblNavSell").innerText = isHi ? "बेचें" : "Sell";
+      document.getElementById("lblNavBuy").innerText = isHi ? "खरीदें" : "Buy";
+      document.getElementById("lblNavTrack").innerText = isHi ? "ट्रैकिंग" : "Track";
+      document.getElementById("lblNavProfile").innerText = isHi ? "खाता" : "Profile";
+
+      renderHomeSlider();
+      renderHomeCategories();
+      renderBuyStock();
+      renderTrackOrders();
+    }
+
+    // Startup Initialization
+    function initApp() {
+      updateTextsForLanguage();
+
+      const savedUser = localStorage.getItem("sahibhaav_user");
+      if (savedUser) {
+        try {
+          applyProfileUI(JSON.parse(savedUser));
+        } catch (e) {}
+      }
+
+      // If user has already completed flow, jump to main app. Otherwise start at Welcome screen
+      const flowDone = localStorage.getItem("sahibhaav_flow_completed");
+      if (flowDone) {
+        goToScreen("screenMainApp");
+      } else {
+        goToScreen("screenWelcome");
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
